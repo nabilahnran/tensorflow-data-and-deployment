@@ -1,0 +1,20 @@
+<html>
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></script>
+</head>
+
+
+
+<body>
+	<h1>This is a MNIST Classifier!</h1>
+	<h3>Where you can draw number between 0-9 by yourself and we will predict for you.</h3>
+	<!-- 280x280 adapted from dataset shape (each 28x28) that have been trained-->
+	<canvas id="canvas" width="280" height="280" style="position:absolute;top:100;left:200;border:8px solid;"></canvas>
+    <img id="canvasimg" style="position:absolute;top:10%;left:52%;width=280;height=280;display:none;">
+	<input type="button" id="save" value="classify" size="50" style="position: absolute; top: 430; left: 440;">
+	<input type="button" id="delete" value="clear" size="50" style="position: absolute; top: 430; left: 500">
+	<script src="mnist-data.js" type="module"></script>
+	<script src="mnist-script.js" type="module"></script>
+</body>
+</html>
