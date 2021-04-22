@@ -1,1 +1,4 @@
+Sprite Sheet:
 https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png
+Label:
+https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8
