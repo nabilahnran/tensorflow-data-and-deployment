@@ -1,0 +1,5 @@
+Sprite Image:
+https://storage.googleapis.com/learnjs-data/model-builder/fashion_mnist_images.png
+
+Labels:
+https://storage.googleapis.com/learnjs-data/model-builder/fashion_mnist_labels_uint8
