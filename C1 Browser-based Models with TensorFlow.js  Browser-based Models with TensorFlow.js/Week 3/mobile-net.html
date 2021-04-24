@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Mobile Net</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+</head>
+<body>
+	<h1>Classifier using Mobile Net</h1>
+	<h3>upload your image down below</h3>
+	<!-- edit this below src field with your existing image in folder-->
+	<img id="img" src="yeontan.jpeg" width="350px" height="350px" style="left: 300; top: 100; position: absolute;">
+	<h5 style="left: 300; top: 440; position: absolute;">Click Predict to predict this image or predict your image by upload it!</h5>
+	<input type="file" id="upload" onchange="onChange()" accept="image/jpeg, image/png" style="left: 300; top: 490; position: absolute;">
+	<input type="button" id="predict" onchange="predict()" value = 'predict' style="left: 590; top: 490; position: absolute;">
+	<div id="output" style="font-family:courier;font-size:20px;height:300px; top:410px; position: relative;"></div>
+</body>
+<script>
+	async function run(){
+		document.getElementById('predict').addEventListener("click", predict);
+	}
+
+	async function predict(){
+		const img = document.getElementById('img');
+		const outp = document.getElementById('output');
+		mobilenet.load().then(model =>{
+			model.classify(img).then(predictions =>{
+				console.log(predictions);
+				for(var i = 0; i<predictions.length; i++){
+					outp.innerHTML += "<br/>" +predictions[i].className + " : " +predictions[i].probability;
+				}
+				outp.innerHTML += "<br/>";
+			});
+		});
+	}
+
+	function onChange() {
+		    var imageDisplay = document.getElementById('img');
+		    var uploadedImage = document.getElementById('upload').files[0];
+		    imageDisplay.src = URL.createObjectURL(uploadedImage);
+		}
+	run();
+</script>
+</html>
