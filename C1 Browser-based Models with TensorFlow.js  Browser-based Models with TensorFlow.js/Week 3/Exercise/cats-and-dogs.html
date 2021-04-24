@@ -1,0 +1,52 @@
+<html>
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+	<title>Cats and Dogs Classifier</title>
+</head>
+<body>
+	<h1>This is an Cats and Dogs Image Classifier!</h1>
+	<img id="img"  width="350px" height="350px" style="left: 300; top: 100; position: absolute;"></img>
+	<input id="upload" type="file" onchange="changeImage()" accept="image/jpeg, image/png" style="left: 300; top: 470; position: absolute;">
+	<input id="predict" type="button" value="Predict" style="left: 590; top: 470; position: absolute;">
+	<script>
+		const MODEL_URL = 'http://127.0.0.1:8887/model.json';
+		const classifierElement = document.getElementById('classifier');
+		const loaderElement = document.getElementById('loader');
+
+		async function initialize() {
+
+		    model = await tf.loadLayersModel(MODEL_URL);
+		    model.summary()
+		    document.getElementById('predict').addEventListener('click', () => predict());
+
+		}
+
+		async function predict () {
+		    const imageElement = document.getElementById('img');
+		    let tensorImg = tf.browser.fromPixels(imageElement).resizeNearestNeighbor([150, 150]).toFloat().expandDims();
+		    prediction = await model.predict(tensorImg).data();
+
+		    if (prediction[0] == 0) {
+
+		        alert("You uploaded a cat!");
+
+		    } else if (prediction[0] == 1) {
+
+		        alert("You uploaded a dog!");
+
+		    } else {
+		        alert("Hummm... a weird error occurred.");
+		    }
+
+		}
+
+		function changeImage() {
+		    var imageDisplay = document.getElementById('img');
+		    var uploadedImage = document.getElementById('upload').files[0];
+		    imageDisplay.src = URL.createObjectURL(uploadedImage);
+		}
+
+		initialize();
+	</script>
+</body>
+</html>
